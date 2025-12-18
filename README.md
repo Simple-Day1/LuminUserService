@@ -136,6 +136,7 @@ PATCH  /api/users/{user_id}/username # Изменить имя
 PATCH  /api/users/{user_id}/email    # Изменить email
 PATCH  /api/users/{user_id}/phone    # Изменить телефон
 POST   /api/users/{user_id}/activate # Активировать пользователя
+POST   /api/users/{user_id}/deactivate # Деактивировать пользователя
 ```
 
 #### Задачи (асинхронные операции)
@@ -175,17 +176,31 @@ curl http://localhost:8000/api/users/tasks/task_abc123
 
 ```
 LuminUserService/
-├── application/              # Слой приложения
+├── application/             # Слой приложения
 │   ├── commands/            # Команды и их обработчики
+│   │   ├── activate.py      # Активация пользователя
+│   │   ├── block.py         # Заблокировать пользователя
+│   │   ├── change_avatar_url.py         # Изменить ссылку на аватар пользователя
+│   │   ├── change_bio.py    # Изменить описание пользователя
+│   │   ├── change_date.py   # Изменить дату рождения пользователя
+│   │   ├── change_email.py  # Изменение email 
+│   │   ├── change_language_code.py         # Изменить языковой код пользователя
+│   │   ├── change_phone.py  # Изменить номер телефона пользователя
+│   │   ├── change_privacy_settings.py         # Изменить настройки приватности пользователя
+│   │   ├── change_username.py         # Изменить имя пользователя
+│   │   ├── deactivate.py    # Деактивация пользователя
 │   │   ├── create.py        # Создание пользователя
-│   │   ├── change_email.py  # Изменение email
-│   │   └── activate.py      # Активация пользователя
+│   │   ├── delete.py        # Удалить пользователя
+│   │   └── record_profile_view.py       # Записать просмотр профиля пользователя
 │   ├── queries/             # Запросы и их обработчики
 │   │   └── get_by_id.py     # Получение по ID
 │   └── services/            # Доменные сервисы
 │       └── user_service.py  # Сервис пользователей
+│   └── taskiq/              # TaskIQ задачи
+│       └── user_commands.py  # Сервис задач
 ├── domain/                  # Доменный слой
 │   ├── aggregates/          # Агрегаты
+│   │   └── aggregate_root.py          #Корень агрегата
 │   │   └── user.py          # Агрегат User
 │   ├── entities/            # Сущности
 │   │   └── profile_view.py  # Просмотр профиля
