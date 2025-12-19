@@ -199,18 +199,24 @@ LuminUserService/
 │   └── taskiq/              # TaskIQ задачи
 │       └── user_commands.py  # Сервис задач
 ├── domain/                  # Доменный слой
-│   ├── aggregates/          # Агрегаты
-│   │   └── aggregate_root.py          #Корень агрегата
-│   │   └── user.py          # Агрегат User
-│   ├── entities/            # Сущности
-│   │   └── profile_view.py  # Просмотр профиля
-│   ├── value_objects/       # Объекты-значения
-│   │   ├── email.py         # Email
-│   │   ├── phone.py         # Телефон
-│   │   └── username.py      # Имя пользователя
+│   ├── models/              # Модели
+│   │   └── aggregates/          # Агрегаты
+│   │   │   ├── aggregate_root.py          # Корень агрегата
+│   │   │   └── user.py          # Агрегат User
+│   │   ├── entities/            # Сущности
+│   │   │   ├── base_entity.py   # Абстракция сущности
+│   │   │   └── profile_view.py  # Просмотр профиля
+│   │   └── common/       # Общие файлы
+│   │       └── value_objects.py      # Объекты-значения
 │   ├── events/              # Доменные события
+│   │   ├── domain_event.py  # Доменное событие
+│   │   ├── event_bus.py     # Шина событий
 │   │   └── user_events.py   # События пользователя
 │   └── repositories/        # Интерфейсы репозиториев
+│   │   ├── data_mapper.py   # Абстракция маппинга
+│   │   ├── identity_map.py  # Абстракция identity map
+│   │   ├── repositories.py  # Абстракция репозитория
+│   │   └── unit_of_worlk.py # Абстракция единицы работы
 ├── infrastructure/          # Инфраструктурный слой
 │   ├── persistance/         # Персистентность
 │   │   ├── repositories/    # Реализации репозиториев
@@ -235,10 +241,13 @@ LuminUserService/
 │   ├── unit/               # Юнит-тесты
 │   ├── integration/        # Интеграционные тесты
 │   └── fixtures/           # Фикстуры
-├── migrations/              # Миграции базы данных
-├── worker/                  # Воркеры
+├── migrations/             # Миграции базы данных
+├── worker/                 # Воркеры
 │   └── outbox_worker.py    # Outbox воркер
-├── main.py                  # Точка входа
+├── .dockerignore           # .dockerignore файл
+├── .gitignore              # .gitignore файл
+├── .python-version         # Фацйл с версией питона
+├── main.py                 # Точка входа
 ├── pyproject.toml          # Зависимости и конфигурация
 ├── docker-compose.yml      # Docker компоновка
 └── README.md               # Эта документация
