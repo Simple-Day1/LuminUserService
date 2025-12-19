@@ -234,9 +234,7 @@ LuminUserService/
 │   └── dependency_container.py # DI контейнер
 ├── presentation/            # Слой представления
 │   └── api/
-│       ├── controllers.py   # Контроллеры API
-│       ├── dependencies.py  # Зависимости
-│       └── schemas.py       # Pydantic схемы
+│       └── controllers.py   # Контроллеры API
 ├── tests/                   # Тесты
 │   ├── unit/               # Юнит-тесты
 │   ├── integration/        # Интеграционные тесты
